@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulador Lean de Lucro e Caixa</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Planejamento financeiro enxuto</p>
+      <h1>Simulador Lean de Lucro e Caixa</h1>
+      <p>
+        Ajuste as decisões de gestão e veja o impacto imediato em lucro, caixa e risco.
+      </p>
+    </div>
+    <div class="hero-actions">
+      <button class="btn ghost" id="scenario-conservative">Cenário Conservador</button>
+      <button class="btn" id="scenario-base">Cenário Base</button>
+      <button class="btn ghost" id="scenario-aggressive">Cenário Agressivo</button>
+      <button class="btn secondary" id="reset">Resetar</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Entradas principais</h2>
+      <p class="section-subtitle">
+        Informe os dados do seu negócio para simular os resultados automaticamente.
+      </p>
+      <div class="grid inputs">
+        <label>
+          Preço médio (R$)
+          <input type="number" id="price" min="0" step="0.01" />
+        </label>
+        <label>
+          Volume de vendas mensal (unidades)
+          <input type="number" id="volume" min="0" step="1" />
+        </label>
+        <label>
+          Custo variável unitário (R$)
+          <input type="number" id="variable" min="0" step="0.01" />
+        </label>
+        <label>
+          Custos fixos mensais (R$)
+          <input type="number" id="fixed" min="0" step="0.01" />
+        </label>
+        <label>
+          Prazo de recebimento (dias)
+          <input type="number" id="receivable" min="0" step="1" />
+        </label>
+        <label>
+          Prazo de pagamento (dias)
+          <input type="number" id="payable" min="0" step="1" />
+        </label>
+        <label>
+          Inadimplência (%)
+          <input type="number" id="default" min="0" max="100" step="0.1" />
+        </label>
+        <label>
+          Capacidade máxima mensal (unidades)
+          <input type="number" id="capacity" min="0" step="1" />
+        </label>
+      </div>
+      <p class="small input-note" id="input-note"></p>
+    </section>
+
+    <section class="panel">
+      <h2>Resultados em tempo real</h2>
+      <div class="grid kpis">
+        <article class="card">
+          <p>Receita</p>
+          <h3 id="revenue">R$ 0</h3>
+          <span class="tag">Mensal</span>
+        </article>
+        <article class="card">
+          <p>Margem de contribuição</p>
+          <h3 id="contribution">R$ 0</h3>
+          <span class="tag" id="contribution-rate">0%</span>
+        </article>
+        <article class="card">
+          <p>Lucro operacional</p>
+          <h3 id="profit">R$ 0</h3>
+          <span class="tag">Mensal</span>
+        </article>
+        <article class="card">
+          <p>Ponto de equilíbrio</p>
+          <h3 id="breakeven">0 un.</h3>
+          <span class="tag">Volume</span>
+        </article>
+      </div>
+
+      <div class="grid insights">
+        <div class="card">
+          <h4>Alertas</h4>
+          <ul id="alerts" class="alerts"></ul>
+        </div>
+        <div class="card">
+          <h4>Resumo de caixa projetado</h4>
+          <p class="small" id="cash-summary">Nenhuma projeção ainda.</p>
+          <p class="small" id="projection-assumptions"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Evolução do caixa (12 meses)</h2>
+      <div class="chart-wrapper">
+        <canvas id="cash-chart" width="900" height="280"></canvas>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Mês</th>
+              <th>Recebimentos</th>
+              <th>Pagamentos</th>
+              <th>Caixa líquido</th>
+              <th>Saldo acumulado</th>
+            </tr>
+          </thead>
+          <tbody id="cash-table"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Simulador Lean de Lucro e Caixa — uso local sem conexão externa.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
