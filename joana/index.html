@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#64271d">
+<title>Joana Alimentos | Portal Gerencial — Demonstração</title>
+<style>
+:root{
+  --bg:#f6f2ed;--paper:#fffdf9;--ink:#2f251f;--muted:#7e7067;--line:#e9ded5;
+  --deep:#64271d;--deep2:#3d1b16;--orange:#ed4b20;--green:#92c83e;--yellow:#f6ab22;--brown:#a8704c;
+  --red:#c8453d;--shadow:0 14px 38px rgba(69,39,28,.08);--radius:17px
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+button,select{font:inherit}.app{display:grid;grid-template-columns:252px 1fr;min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;background:linear-gradient(180deg,var(--deep) 0%,var(--deep2) 100%);padding:21px 15px;color:#fff;display:flex;flex-direction:column;z-index:20}
+.brand{padding:4px 8px 19px;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:16px}
+.brand img{display:block;width:185px;max-width:100%;height:auto;margin:0 auto 8px}
+.brand small{display:block;text-align:center;color:#e7c7ba;font-size:10px;line-height:1.4}
+.colorbar{display:grid;grid-template-columns:repeat(4,1fr);height:5px;border-radius:99px;overflow:hidden;margin-top:11px}.colorbar i:nth-child(1){background:var(--orange)}.colorbar i:nth-child(2){background:var(--green)}.colorbar i:nth-child(3){background:var(--yellow)}.colorbar i:nth-child(4){background:var(--brown)}
+.navlabel{font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:#c69785;padding:7px 11px}.nav{display:flex;flex-direction:column;gap:5px}
+.nav button{border:0;background:transparent;color:#ead8d0;text-align:left;padding:11px 12px;border-radius:10px;cursor:pointer;display:flex;gap:10px;align-items:center;transition:.18s}
+.nav button:hover{background:rgba(255,255,255,.07);color:#fff}.nav button.active{background:linear-gradient(90deg,rgba(237,75,32,.28),rgba(237,75,32,.07));box-shadow:inset 3px 0 0 var(--orange);color:#fff}
+.dot{width:8px;height:8px;border:1.5px solid currentColor;border-radius:50%}.active .dot{background:var(--orange);border-color:var(--orange)}
+.sidefoot{margin-top:auto;padding:16px 10px 4px;font-size:10px;line-height:1.55;color:#c69c8c}.sidefoot strong{color:#fff}
+main{min-width:0}.top{height:78px;position:sticky;top:0;z-index:15;background:rgba(255,253,249,.94);backdrop-filter:blur(10px);border-top:4px solid transparent;border-image:linear-gradient(90deg,var(--orange),var(--green),var(--yellow),var(--brown)) 1;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px}
+.crumb{font-size:12px;color:var(--muted)}.crumb strong{color:var(--ink)}.topright{display:flex;align-items:center;gap:10px}.demo{font-size:9px;font-weight:850;letter-spacing:.04em;background:#fff2d6;color:#7f5814;border:1px solid #efd8a4;padding:7px 9px;border-radius:999px}.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--orange),#b93228);color:#fff;font-size:11px;font-weight:800}
+.content{max-width:1570px;margin:auto;padding:24px 30px 50px}.page{display:none}.page.active{display:block}
+.hero{position:relative;overflow:hidden;border-radius:22px;padding:27px 29px;margin-bottom:22px;color:#fff;background:
+ radial-gradient(circle at 85% 20%,rgba(246,171,34,.25),transparent 25%),
+ radial-gradient(circle at 74% 85%,rgba(146,200,62,.18),transparent 28%),
+ linear-gradient(115deg,#512017 0%,#7a2b1d 60%,#9d492b 100%);box-shadow:0 18px 45px rgba(80,35,24,.16)}
+.hero:after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;background:linear-gradient(90deg,var(--orange) 0 25%,var(--green) 25% 50%,var(--yellow) 50% 75%,var(--brown) 75%)}
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:25px;align-items:center;position:relative;z-index:1}.eyebrow{font-size:9px;letter-spacing:.16em;color:#ffcbaa;font-weight:900}.hero h1{font-size:29px;line-height:1.06;max-width:710px;margin:8px 0 7px;letter-spacing:-.035em}.hero p{margin:0;color:#f0d9ce;font-size:12px;max-width:700px;line-height:1.5}.seal{border:1px solid rgba(255,255,255,.21);background:rgba(255,255,255,.07);backdrop-filter:blur(5px);padding:15px 17px;border-radius:15px;text-align:right;min-width:205px}.seal span{font-size:9px;color:#efcfc1}.seal strong{display:block;font-size:17px;margin-top:4px}
+.pagehead{display:flex;justify-content:space-between;gap:18px;align-items:flex-end;margin-bottom:18px}.pagetitle h2{font-size:26px;letter-spacing:-.03em;margin:0;color:#3f2a22}.pagetitle h2:after{content:"";display:block;width:46px;height:4px;margin-top:8px;border-radius:99px;background:linear-gradient(90deg,var(--orange),var(--yellow))}.pagetitle p{font-size:12px;color:var(--muted);margin:7px 0 0}.updated{font-size:10px;color:var(--muted);text-align:right;line-height:1.45}
+.filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:9px;margin-bottom:15px;box-shadow:0 4px 18px rgba(50,31,22,.035)}.filter{padding:2px 12px;border-right:1px solid var(--line);display:flex;align-items:center;gap:8px}.filter:last-of-type{border-right:0}.filter label{font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:#9b8d84;font-weight:800}.filter select{border:0;background:transparent;outline:0;color:var(--ink);font-size:11px;font-weight:700}.grow{flex:1}.ghost{background:#fff;border:1px solid #e3d6cc;color:var(--deep);border-radius:9px;padding:8px 11px;font-size:10px;font-weight:800;cursor:pointer}
+.grid{display:grid;gap:14px}.kpis{grid-template-columns:repeat(6,minmax(0,1fr));margin-bottom:14px}.two{grid-template-columns:1.45fr 1fr}.equal{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:17px;min-width:0}.kpi{position:relative;overflow:hidden}.kpi:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--orange)}.kpi:nth-child(2):before,.kpi:nth-child(5):before{background:var(--green)}.kpi:nth-child(3):before,.kpi:nth-child(6):before{background:var(--yellow)}.kpi:nth-child(4):before{background:var(--brown)}
+.klabel{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:#887a72;font-weight:850}.kvalue{font-size:23px;font-weight:850;letter-spacing:-.035em;margin-top:8px;white-space:nowrap}.kfoot{display:flex;justify-content:space-between;gap:8px;font-size:9px;color:var(--muted);margin-top:9px}.up{color:#4d8b27;font-weight:800}.down{color:var(--red);font-weight:800}.spark{height:4px;background:#eee6df;border-radius:99px;overflow:hidden;margin-top:10px}.spark i{display:block;height:100%;background:var(--orange);border-radius:99px}.green i{background:var(--green)}.yellow i{background:var(--yellow)}
+.chead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:13px}.ctitle{font-size:12px;font-weight:850;color:#432d24}.csub{font-size:10px;color:var(--muted);margin-top:4px}.legend{display:flex;gap:12px;font-size:9px;color:var(--muted)}.legend span:before{content:"";display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--orange);margin-right:5px}.legend .gray:before{background:#c9bfb7}
+.chart{height:250px}.chart svg{width:100%;height:100%;overflow:visible}.gl{stroke:#eee6df;stroke-width:1}.lab{font-size:9px;fill:#9c9088}.lineA{fill:none;stroke:var(--orange);stroke-width:3}.lineB{fill:none;stroke:#bbb0a8;stroke-width:2;stroke-dasharray:5 5}.area{fill:url(#og)}.pt{fill:#fff;stroke:var(--orange);stroke-width:2}.barA{fill:var(--orange)}.barG{fill:#ded6cf}
+.insights{display:flex;flex-direction:column;gap:9px}.insight{display:grid;grid-template-columns:7px 1fr auto;gap:10px;border:1px solid var(--line);background:#fbf7f3;border-radius:12px;padding:12px}.flag{border-radius:99px;background:var(--orange)}.good .flag{background:var(--green)}.warn .flag{background:var(--yellow)}.insight strong{font-size:11px}.insight p{font-size:10px;color:var(--muted);line-height:1.45;margin:4px 0 0}.tag{font-size:8px;font-weight:800;border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 7px;height:max-content;color:#7d7067}
+table{width:100%;border-collapse:collapse}th{font-size:9px;text-transform:uppercase;letter-spacing:.045em;color:#8b776c;background:#fdf7f2;text-align:left;padding:9px;border-bottom:1px solid var(--line)}td{font-size:10.5px;padding:10px 9px;border-bottom:1px solid #f0e9e3;color:#514943}th.num,td.num{text-align:right}.bold{font-weight:850;color:#2e241f!important}.total td{font-weight:850;background:#fbf6f1}.positive{color:#4d8b27!important}.negative{color:#b83f39!important}
+.pill{display:inline-flex;align-items:center;justify-content:center;height:20px;padding:0 7px;border-radius:999px;font-size:8px;font-weight:850}.a,.ok{background:#ecf7e3;color:#4e8429}.b,.att{background:#fff3d6;color:#926310}.c{background:#f4e9e4;color:#99593f}.off{background:#fae7e4;color:#a53d36}
+.tabs{display:flex;gap:4px;background:#eee3da;padding:4px;border-radius:10px;width:max-content;margin-bottom:13px}.tabs button{border:0;background:transparent;padding:7px 10px;border-radius:7px;font-size:9px;font-weight:800;color:#83756c;cursor:pointer}.tabs button.active{background:#fff;color:var(--deep);box-shadow:0 2px 8px rgba(50,30,20,.07)}
+.abcrow{display:grid;grid-template-columns:28px minmax(140px,1.4fr) 1fr 88px 60px;align-items:center;gap:9px;padding:10px 4px;border-bottom:1px solid #efe7e1;font-size:10px}.rank{text-align:center;color:#9d9188;font-weight:850}.name{font-weight:700}.track{height:7px;background:#eee6df;border-radius:99px;overflow:hidden}.track i{display:block;height:100%;border-radius:99px;background:var(--orange)}.money{text-align:right;font-weight:850}.pct{text-align:right;color:var(--muted)}
+.flow{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr;align-items:center;gap:9px}.fbox{border:1px solid var(--line);background:#fbf7f3;border-radius:12px;padding:14px}.fbox span{font-size:9px;color:var(--muted)}.fbox strong{display:block;margin-top:5px;font-size:18px}.arrow{text-align:center;color:#b7aaa1;font-size:20px}
+.note{margin-top:15px;border-radius:13px;background:#eee5df;padding:12px 14px;color:#75665d;font-size:10px;line-height:1.5}.note strong{color:#4c3328}
+.mobile{display:none}
+@media(max-width:1180px){.app{grid-template-columns:220px 1fr}.kpis{grid-template-columns:repeat(3,1fr)}.two,.equal{grid-template-columns:1fr}.brand img{width:160px}}
+@media(max-width:760px){.app{display:block}.sidebar{position:fixed;left:-255px;width:245px;transition:.25s}.sidebar.open{left:0}.mobile{display:block;border:0;background:transparent;font-size:20px}.top{padding:0 16px}.content{padding:18px 15px 40px}.kpis{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}.seal{display:none}.hero h1{font-size:23px}.demo{display:none}.three{grid-template-columns:1fr}.pagehead{align-items:flex-start;flex-direction:column}.updated{text-align:left}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <img src="https://jpcondimentos.com.br/wp-content/uploads/2025/05/LOGO-SEM-FUNDO-3-3-1024x658.png" alt="Joana Alimentos" onerror="this.style.display='none';document.getElementById('brandFallback').style.display='block'">
+    <div id="brandFallback" style="display:none;text-align:center;font-size:18px;font-weight:850">Joana Alimentos</div>
+    <small>O tempero certo faz toda a diferença.</small>
+    <div class="colorbar"><i></i><i></i><i></i><i></i></div>
+  </div>
+  <div class="navlabel">Visão gerencial</div>
+  <nav class="nav">
+    <button class="active" data-page="executivo"><span class="dot"></span>Visão Executiva</button>
+    <button data-page="dre"><span class="dot"></span>DRE Gerencial</button>
+    <button data-page="fluxo"><span class="dot"></span>Fluxo de Caixa</button>
+    <button data-page="abc"><span class="dot"></span>Curva ABC</button>
+    <button data-page="clientes"><span class="dot"></span>Clientes</button>
+    <button data-page="produtos"><span class="dot"></span>Produtos & Margem</button>
+  </nav>
+  <div class="navlabel" style="margin-top:17px">Configurações</div>
+  <nav class="nav"><button data-page="integracoes"><span class="dot"></span>Dados & Integrações</button></nav>
+  <div class="sidefoot"><strong>Joana Alimentos</strong><br>Portal Gerencial · Demonstração<br><br>Powered by <strong>Lean Company</strong></div>
+</aside>
+<main>
+<header class="top">
+  <button class="mobile" id="mobile">☰</button>
+  <div class="crumb">Joana Alimentos &nbsp;/&nbsp; <strong id="crumb">Visão Executiva</strong></div>
+  <div class="topright"><span class="demo">DEMONSTRAÇÃO · DADOS FICTÍCIOS</span><div class="avatar">JA</div></div>
+</header>
+<div class="content">
+
+<section class="page active" id="executivo">
+  <div class="hero">
+    <div class="hero-grid">
+      <div><span class="eyebrow">PAINEL GERENCIAL · JOANA ALIMENTOS</span><h1>Gestão com clareza para temperar melhores decisões.</h1><p>Financeiro, comercial, clientes e produtos conectados em uma visão executiva única.</p></div>
+      <div class="seal"><span>Confiança que</span><strong>tempera resultados</strong></div>
+    </div>
+  </div>
+  <div class="pagehead"><div class="pagetitle"><h2>Visão Executiva</h2><p>Os principais números da operação em uma única tela, com foco em decisão.</p></div><div class="updated">Última atualização demonstrativa<br><strong>24/09/2026 · 18:00</strong></div></div>
+  <div class="filters"><div class="filter"><label>Período</label><select><option>Jan — Ago 2026</option><option>Últimos 12 meses</option><option>2025</option></select></div><div class="filter"><label>Comparar</label><select><option>Mesmo período 2025</option><option>Meta 2026</option></select></div><div class="filter"><label>Unidade</label><select><option>Consolidado</option><option>Indústria</option><option>Distribuição</option></select></div><div class="grow"></div><button class="ghost">Mais filtros</button></div>
+  <div class="grid kpis">
+    <div class="card kpi"><div class="klabel">Faturamento</div><div class="kvalue">R$ 12,84 mi</div><div class="kfoot"><span class="up">▲ 14,8%</span><span>vs. 2025</span></div><div class="spark"><i style="width:84%"></i></div></div>
+    <div class="card kpi"><div class="klabel">Margem contribuição</div><div class="kvalue">36,4%</div><div class="kfoot"><span class="up">▲ 2,1 p.p.</span><span>vs. 2025</span></div><div class="spark green"><i style="width:73%"></i></div></div>
+    <div class="card kpi"><div class="klabel">EBITDA</div><div class="kvalue">18,9%</div><div class="kfoot"><span class="down">▼ 0,7 p.p.</span><span>vs. 2025</span></div><div class="spark yellow"><i style="width:63%"></i></div></div>
+    <div class="card kpi"><div class="klabel">Lucro líquido</div><div class="kvalue">13,7%</div><div class="kfoot"><span class="up">▲ 1,4 p.p.</span><span>vs. 2025</span></div><div class="spark green"><i style="width:69%"></i></div></div>
+    <div class="card kpi"><div class="klabel">Caixa projetado 30d</div><div class="kvalue">R$ 824 mil</div><div class="kfoot"><span class="up">+ R$ 186 mil</span><span>saldo</span></div><div class="spark green"><i style="width:78%"></i></div></div>
+    <div class="card kpi"><div class="klabel">Inadimplência</div><div class="kvalue">2,6%</div><div class="kfoot"><span class="up">▼ 0,5 p.p.</span><span>melhora</span></div><div class="spark green"><i style="width:86%"></i></div></div>
+  </div>
+  <div class="grid two">
+    <div class="card"><div class="chead"><div><div class="ctitle">Faturamento x Meta</div><div class="csub">Evolução mensal · R$ milhões</div></div><div class="legend"><span>Realizado</span><span class="gray">Meta</span></div></div>
+      <div class="chart"><svg viewBox="0 0 760 250" preserveAspectRatio="none"><defs><linearGradient id="og" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#ed4b20" stop-opacity=".18"/><stop offset="100%" stop-color="#ed4b20" stop-opacity="0"/></linearGradient></defs>
+      <line class="gl" x1="50" y1="35" x2="735" y2="35"/><line class="gl" x1="50" y1="90" x2="735" y2="90"/><line class="gl" x1="50" y1="145" x2="735" y2="145"/><line class="gl" x1="50" y1="200" x2="735" y2="200"/>
+      <text class="lab" x="4" y="39">2,0</text><text class="lab" x="4" y="94">1,6</text><text class="lab" x="4" y="149">1,2</text><text class="lab" x="4" y="204">0,8</text>
+      <path class="area" d="M55,176 L145,153 L235,135 L325,111 L415,100 L505,84 L595,71 L685,59 L685,210 L55,210 Z"/><path class="lineA" d="M55,176 L145,153 L235,135 L325,111 L415,100 L505,84 L595,71 L685,59"/><path class="lineB" d="M55,166 L145,156 L235,143 L325,128 L415,113 L505,98 L595,84 L685,72"/>
+      <circle class="pt" cx="55" cy="176" r="4"/><circle class="pt" cx="145" cy="153" r="4"/><circle class="pt" cx="235" cy="135" r="4"/><circle class="pt" cx="325" cy="111" r="4"/><circle class="pt" cx="415" cy="100" r="4"/><circle class="pt" cx="505" cy="84" r="4"/><circle class="pt" cx="595" cy="71" r="4"/><circle class="pt" cx="685" cy="59" r="4"/>
+      <text class="lab" x="47" y="232">Jan</text><text class="lab" x="137" y="232">Fev</text><text class="lab" x="227" y="232">Mar</text><text class="lab" x="317" y="232">Abr</text><text class="lab" x="407" y="232">Mai</text><text class="lab" x="497" y="232">Jun</text><text class="lab" x="587" y="232">Jul</text><text class="lab" x="677" y="232">Ago</text></svg></div>
+    </div>
+    <div class="card"><div class="chead"><div><div class="ctitle">Pontos de atenção</div><div class="csub">Alertas que exigem decisão</div></div></div><div class="insights">
+      <div class="insight good"><div class="flag"></div><div><strong>Margem de contribuição em evolução</strong><p>Ganho de 2,1 p.p. frente ao mesmo período do ano anterior.</p></div><span class="tag">POSITIVO</span></div>
+      <div class="insight warn"><div class="flag"></div><div><strong>Concentração comercial elevada</strong><p>Os 10 maiores clientes representam 48,2% do faturamento.</p></div><span class="tag">ATENÇÃO</span></div>
+      <div class="insight"><div class="flag"></div><div><strong>EBITDA abaixo da meta</strong><p>Despesas operacionais cresceram acima do faturamento em julho e agosto.</p></div><span class="tag">AÇÃO</span></div>
+      <div class="insight warn"><div class="flag"></div><div><strong>Carteira para reativação</strong><p>18 clientes relevantes estão há mais de 75 dias sem comprar.</p></div><span class="tag">COMERCIAL</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="dre">
+  <div class="pagehead"><div class="pagetitle"><h2>DRE Gerencial</h2><p>Resultado econômico, margens e comparação com meta.</p></div><div class="updated">Valores demonstrativos · R$ mil</div></div>
+  <div class="filters"><div class="filter"><label>Período</label><select><option>Jan — Ago 2026</option></select></div><div class="filter"><label>Visão</label><select><option>Mensal + acumulado</option><option>Somente acumulado</option></select></div></div>
+  <div class="grid kpis">
+    <div class="card kpi"><div class="klabel">Receita líquida</div><div class="kvalue">R$ 12,18 mi</div><div class="kfoot"><span class="up">▲ 13,9%</span><span>vs. 2025</span></div></div>
+    <div class="card kpi"><div class="klabel">Margem contribuição</div><div class="kvalue">36,4%</div><div class="kfoot"><span class="up">+2,1 p.p.</span><span>evolução</span></div></div>
+    <div class="card kpi"><div class="klabel">EBITDA</div><div class="kvalue">18,9%</div><div class="kfoot"><span class="down">-0,7 p.p.</span><span>vs. meta</span></div></div>
+    <div class="card kpi"><div class="klabel">Lucro líquido</div><div class="kvalue">13,7%</div><div class="kfoot"><span class="up">+1,4 p.p.</span><span>vs. 2025</span></div></div>
+    <div class="card kpi"><div class="klabel">Ponto equilíbrio</div><div class="kvalue">R$ 1,18 mi</div><div class="kfoot"><span>mensal</span><span></span></div></div>
+    <div class="card kpi"><div class="klabel">Folga sobre PE</div><div class="kvalue">31,6%</div><div class="kfoot"><span class="up">saudável</span><span></span></div></div>
+  </div>
+  <div class="card"><table><thead><tr><th>Conta</th><th class="num">Jan</th><th class="num">Fev</th><th class="num">Mar</th><th class="num">Abr</th><th class="num">Mai</th><th class="num">Jun</th><th class="num">Jul</th><th class="num">Ago</th><th class="num">Acum.</th><th class="num">% Rec.</th></tr></thead><tbody>
+  <tr class="bold"><td>Faturamento Bruto</td><td class="num">1.390</td><td class="num">1.475</td><td class="num">1.522</td><td class="num">1.595</td><td class="num">1.642</td><td class="num">1.693</td><td class="num">1.742</td><td class="num">1.781</td><td class="num bold">12.840</td><td class="num">100,0%</td></tr>
+  <tr><td>(-) Deduções / Impostos</td><td class="num">72</td><td class="num">75</td><td class="num">77</td><td class="num">80</td><td class="num">84</td><td class="num">86</td><td class="num">89</td><td class="num">91</td><td class="num">654</td><td class="num">5,1%</td></tr>
+  <tr class="total"><td>Receita Líquida</td><td class="num">1.318</td><td class="num">1.400</td><td class="num">1.445</td><td class="num">1.515</td><td class="num">1.558</td><td class="num">1.607</td><td class="num">1.653</td><td class="num">1.690</td><td class="num">12.186</td><td class="num">94,9%</td></tr>
+  <tr><td>(-) Custos Variáveis</td><td class="num">839</td><td class="num">887</td><td class="num">913</td><td class="num">950</td><td class="num">974</td><td class="num">998</td><td class="num">1.028</td><td class="num">1.060</td><td class="num">7.649</td><td class="num">59,6%</td></tr>
+  <tr class="total"><td>Margem de Contribuição</td><td class="num">479</td><td class="num">513</td><td class="num">532</td><td class="num">565</td><td class="num">584</td><td class="num">609</td><td class="num">625</td><td class="num">630</td><td class="num positive">4.537</td><td class="num positive">36,4%</td></tr>
+  <tr><td>(-) Despesas Operacionais</td><td class="num">235</td><td class="num">248</td><td class="num">254</td><td class="num">261</td><td class="num">268</td><td class="num">277</td><td class="num">300</td><td class="num">318</td><td class="num">2.161</td><td class="num">17,5%</td></tr>
+  <tr class="total"><td>EBITDA</td><td class="num">244</td><td class="num">265</td><td class="num">278</td><td class="num">304</td><td class="num">316</td><td class="num">332</td><td class="num">325</td><td class="num">312</td><td class="num positive">2.276</td><td class="num positive">18,9%</td></tr>
+  <tr><td>(-) Financeiro / Outros</td><td class="num">70</td><td class="num">68</td><td class="num">72</td><td class="num">77</td><td class="num">81</td><td class="num">85</td><td class="num">89</td><td class="num">91</td><td class="num">633</td><td class="num">5,2%</td></tr>
+  <tr class="total"><td>Lucro Líquido</td><td class="num">174</td><td class="num">197</td><td class="num">206</td><td class="num">227</td><td class="num">235</td><td class="num">247</td><td class="num">236</td><td class="num">221</td><td class="num positive">1.743</td><td class="num positive">13,7%</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="page" id="fluxo">
+  <div class="pagehead"><div class="pagetitle"><h2>Fluxo de Caixa</h2><p>Liquidez, compromissos e projeção financeira.</p></div><div class="updated">Cenário demonstrativo · próximos 90 dias</div></div>
+  <div class="grid kpis">
+    <div class="card kpi"><div class="klabel">Saldo atual</div><div class="kvalue">R$ 638 mil</div><div class="kfoot"><span class="up">+11%</span><span>vs. mês anterior</span></div></div>
+    <div class="card kpi"><div class="klabel">A receber 30d</div><div class="kvalue">R$ 2,41 mi</div><div class="kfoot"><span>carteira</span><span></span></div></div>
+    <div class="card kpi"><div class="klabel">A pagar 30d</div><div class="kvalue">R$ 2,22 mi</div><div class="kfoot"><span>compromissos</span><span></span></div></div>
+    <div class="card kpi"><div class="klabel">Saldo projetado 30d</div><div class="kvalue">R$ 824 mil</div><div class="kfoot"><span class="up">+ R$ 186 mil</span><span></span></div></div>
+    <div class="card kpi"><div class="klabel">Menor saldo previsto</div><div class="kvalue">R$ 412 mil</div><div class="kfoot"><span>em 18 dias</span><span></span></div></div>
+    <div class="card kpi"><div class="klabel">Inadimplência</div><div class="kvalue">2,6%</div><div class="kfoot"><span class="up">▼ 0,5 p.p.</span><span></span></div></div>
+  </div>
+  <div class="grid equal">
+    <div class="card"><div class="chead"><div><div class="ctitle">Ponte de caixa · 30 dias</div><div class="csub">Saldo atual + entradas − saídas</div></div></div><div class="flow"><div class="fbox"><span>Saldo atual</span><strong>R$ 638 mil</strong></div><div class="arrow">+</div><div class="fbox"><span>Entradas</span><strong class="positive">R$ 2,41 mi</strong></div><div class="arrow">−</div><div class="fbox"><span>Saídas</span><strong>R$ 2,22 mi</strong></div></div><div class="note"><strong>Projeção:</strong> saldo estimado de R$ 824 mil ao final dos próximos 30 dias, considerando recebimentos e pagamentos previstos.</div></div>
+    <div class="card"><div class="chead"><div><div class="ctitle">Alertas financeiros</div><div class="csub">Riscos e oportunidades</div></div></div><div class="insights"><div class="insight warn"><div class="flag"></div><div><strong>Concentração de pagamentos</strong><p>Semana 3 concentra 31% das saídas previstas do mês.</p></div><span class="tag">CAIXA</span></div><div class="insight good"><div class="flag"></div><div><strong>Liquidez preservada</strong><p>Mesmo no pior dia projetado, o caixa permanece positivo.</p></div><span class="tag">OK</span></div><div class="insight"><div class="flag"></div><div><strong>Recebíveis vencidos</strong><p>R$ 71 mil acima de 30 dias pedem atuação comercial.</p></div><span class="tag">AÇÃO</span></div></div></div>
+  </div>
+</section>
+
+<section class="page" id="abc">
+  <div class="pagehead"><div class="pagetitle"><h2>Curva ABC</h2><p>Concentração de receita por clientes, produtos e vendedores.</p></div><div class="updated">Base demonstrativa · Jan — Ago 2026</div></div>
+  <div class="tabs"><button class="active" data-tab="clientesabc">Clientes</button><button data-tab="produtosabc">Produtos</button><button data-tab="vendedoresabc">Vendedores</button></div>
+  <div class="card"><div class="chead"><div><div class="ctitle" id="abcTitle">Ranking de clientes</div><div class="csub">Representatividade e concentração acumulada</div></div></div><div id="abcList"></div></div>
+</section>
+
+<section class="page" id="clientes">
+  <div class="pagehead"><div class="pagetitle"><h2>Clientes</h2><p>Recorrência, status comercial e oportunidades de reativação.</p></div><div class="updated">Dados fictícios para demonstração</div></div>
+  <div class="grid kpis"><div class="card kpi"><div class="klabel">Clientes ativos</div><div class="kvalue">184</div><div class="kfoot"><span class="up">+12</span><span>vs. 2025</span></div></div><div class="card kpi"><div class="klabel">Em atenção</div><div class="kvalue">27</div><div class="kfoot"><span>45–75 dias</span><span></span></div></div><div class="card kpi"><div class="klabel">Inativos relevantes</div><div class="kvalue">18</div><div class="kfoot"><span class="down">potencial</span><span>reativação</span></div></div><div class="card kpi"><div class="klabel">Ticket médio</div><div class="kvalue">R$ 18,7 mil</div><div class="kfoot"><span class="up">▲ 6,2%</span><span></span></div></div><div class="card kpi"><div class="klabel">Intervalo médio</div><div class="kvalue">29 dias</div><div class="kfoot"><span>recorrência</span><span></span></div></div><div class="card kpi"><div class="klabel">Top 10 clientes</div><div class="kvalue">48,2%</div><div class="kfoot"><span class="down">concentração</span><span></span></div></div></div>
+  <div class="card"><table><thead><tr><th>Cliente</th><th>Status</th><th class="num">Faturamento</th><th class="num">Ticket médio</th><th class="num">Última compra</th><th class="num">Dias sem compra</th><th>Curva</th></tr></thead><tbody>
+  <tr><td class="bold">Distribuidora Norte PR</td><td><span class="pill ok">ATIVO</span></td><td class="num">R$ 684 mil</td><td class="num">R$ 57 mil</td><td class="num">18/09/2026</td><td class="num">6</td><td><span class="pill a">A</span></td></tr>
+  <tr><td class="bold">Empório Brasil Atacado</td><td><span class="pill ok">ATIVO</span></td><td class="num">R$ 598 mil</td><td class="num">R$ 49 mil</td><td class="num">12/09/2026</td><td class="num">12</td><td><span class="pill a">A</span></td></tr>
+  <tr><td class="bold">Alimentos Sul Ltda.</td><td><span class="pill att">ATENÇÃO</span></td><td class="num">R$ 376 mil</td><td class="num">R$ 41 mil</td><td class="num">02/08/2026</td><td class="num">53</td><td><span class="pill a">A</span></td></tr>
+  <tr><td class="bold">Casa do Tempero SP</td><td><span class="pill att">ATENÇÃO</span></td><td class="num">R$ 241 mil</td><td class="num">R$ 27 mil</td><td class="num">19/07/2026</td><td class="num">67</td><td><span class="pill b">B</span></td></tr>
+  <tr><td class="bold">Central Grãos GO</td><td><span class="pill off">INATIVO</span></td><td class="num">R$ 198 mil</td><td class="num">R$ 24 mil</td><td class="num">08/06/2026</td><td class="num">108</td><td><span class="pill b">B</span></td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="page" id="produtos">
+  <div class="pagehead"><div class="pagetitle"><h2>Produtos & Margem</h2><p>Volume, faturamento e rentabilidade por produto.</p></div><div class="updated">Dados fictícios para demonstração</div></div>
+  <div class="grid kpis"><div class="card kpi"><div class="klabel">Produtos ativos</div><div class="kvalue">286</div><div class="kfoot"><span>mix comercial</span><span></span></div></div><div class="card kpi"><div class="klabel">Top 10 produtos</div><div class="kvalue">51,8%</div><div class="kfoot"><span>da receita</span><span></span></div></div><div class="card kpi"><div class="klabel">MC média</div><div class="kvalue">36,4%</div><div class="kfoot"><span class="up">+2,1 p.p.</span><span></span></div></div><div class="card kpi"><div class="klabel">Itens abaixo da meta</div><div class="kvalue">24</div><div class="kfoot"><span class="down">revisar preço</span><span></span></div></div><div class="card kpi"><div class="klabel">Volume</div><div class="kvalue">1.842 t</div><div class="kfoot"><span class="up">▲ 9,4%</span><span></span></div></div><div class="card kpi"><div class="klabel">Preço médio</div><div class="kvalue">R$ 6,97/kg</div><div class="kfoot"><span class="up">▲ 4,9%</span><span></span></div></div></div>
+  <div class="card"><table><thead><tr><th>Produto</th><th>Linha</th><th class="num">Faturamento</th><th class="num">Volume</th><th class="num">MC R$</th><th class="num">MC %</th><th>Curva</th></tr></thead><tbody>
+  <tr><td class="bold">Colorífico Premium</td><td>Premium</td><td class="num">R$ 1,42 mi</td><td class="num">208 t</td><td class="num">R$ 554 mil</td><td class="num positive">39,0%</td><td><span class="pill a">A</span></td></tr>
+  <tr><td class="bold">Chimichurri</td><td>Tradicional</td><td class="num">R$ 1,06 mi</td><td class="num">128 t</td><td class="num">R$ 424 mil</td><td class="num positive">40,1%</td><td><span class="pill a">A</span></td></tr>
+  <tr><td class="bold">Tempero Completo</td><td>Comercial</td><td class="num">R$ 886 mil</td><td class="num">149 t</td><td class="num">R$ 301 mil</td><td class="num">34,0%</td><td><span class="pill a">A</span></td></tr>
+  <tr><td class="bold">Vinagrete Desidratado</td><td>Tradicional</td><td class="num">R$ 742 mil</td><td class="num">83 t</td><td class="num">R$ 293 mil</td><td class="num positive">39,5%</td><td><span class="pill b">B</span></td></tr>
+  <tr><td class="bold">Tempero Pega Marido</td><td>Tradicional</td><td class="num">R$ 628 mil</td><td class="num">72 t</td><td class="num">R$ 207 mil</td><td class="num negative">33,0%</td><td><span class="pill b">B</span></td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="page" id="integracoes">
+  <div class="pagehead"><div class="pagetitle"><h2>Dados & Integrações</h2><p>Como o portal pode receber dados e atualizar os indicadores.</p></div><div class="updated">Arquitetura conceitual</div></div>
+  <div class="grid three">
+    <div class="card"><div class="ctitle">ERP / Sistema atual</div><div class="csub" style="line-height:1.55;margin-top:9px">Importação automática de vendas, clientes, produtos, contas a pagar/receber e estoque via API, banco de dados, ODBC ou exportação estruturada.</div></div>
+    <div class="card"><div class="ctitle">Tratamento Lean</div><div class="csub" style="line-height:1.55;margin-top:9px">Regras gerenciais padronizadas: plano de contas, DRE, curva ABC, recorrência, margens, prazos e demais indicadores definidos com o cliente.</div></div>
+    <div class="card"><div class="ctitle">Portal online</div><div class="csub" style="line-height:1.55;margin-top:9px">Acesso por navegador, com filtros, histórico, indicadores e visões específicas para diretoria, financeiro, comercial e demais usuários autorizados.</div></div>
+  </div>
+  <div class="note" style="margin-top:14px"><strong>Objetivo da solução:</strong> substituir análises dispersas em planilhas por uma camada gerencial única, preservando a lógica construída com a Joana Alimentos e automatizando a atualização dos dados.</div>
+</section>
+
+<div class="note"><strong>Demonstração comercial:</strong> todos os números exibidos neste protótipo são fictícios. O produto final utilizará dados, regras e integrações validados com a Joana Alimentos.</div>
+</div>
+</main>
+</div>
+<script>
+var pageNames={executivo:'Visão Executiva',dre:'DRE Gerencial',fluxo:'Fluxo de Caixa',abc:'Curva ABC',clientes:'Clientes',produtos:'Produtos & Margem',integracoes:'Dados & Integrações'};
+document.querySelectorAll('.nav button').forEach(function(btn){btn.addEventListener('click',function(){var id=btn.dataset.page;document.querySelectorAll('.nav button').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});document.getElementById(id).classList.add('active');document.getElementById('crumb').textContent=pageNames[id];document.getElementById('sidebar').classList.remove('open');window.scrollTo(0,0)})});
+document.getElementById('mobile').addEventListener('click',function(){document.getElementById('sidebar').classList.toggle('open')});
+var abc={
+ clientesabc:[['Distribuidora Norte PR','R$ 684 mil',100,'5,3%','A'],['Empório Brasil Atacado','R$ 598 mil',87,'4,7%','A'],['Rede Mercantil Oeste','R$ 521 mil',76,'4,1%','A'],['Atacado Paraná Sul','R$ 476 mil',70,'3,7%','A'],['Casa dos Temperos','R$ 429 mil',63,'3,3%','A'],['Alimentos Centro-Oeste','R$ 398 mil',58,'3,1%','A'],['Comercial São Paulo','R$ 372 mil',54,'2,9%','A'],['Mercantil Goiás','R$ 338 mil',49,'2,6%','A']],
+ produtosabc:[['Colorífico Premium','R$ 1,42 mi',100,'11,1%','A'],['Chimichurri','R$ 1,06 mi',75,'8,3%','A'],['Tempero Completo','R$ 886 mil',62,'6,9%','A'],['Vinagrete Desidratado','R$ 742 mil',52,'5,8%','A'],['Tempero Pega Marido','R$ 628 mil',44,'4,9%','A'],['Alho Granulado','R$ 512 mil',36,'4,0%','B'],['Cebola Granulada','R$ 471 mil',33,'3,7%','B'],['Pimenta Calabresa','R$ 438 mil',31,'3,4%','B']],
+ vendedoresabc:[['Carteira Norte','R$ 3,84 mi',100,'29,9%','A'],['Carteira Sul','R$ 3,22 mi',84,'25,1%','A'],['Carteira SP','R$ 2,48 mi',65,'19,3%','A'],['Carteira Centro-Oeste','R$ 1,71 mi',45,'13,3%','B'],['Inside Sales','R$ 1,08 mi',28,'8,4%','B'],['Novos Negócios','R$ 510 mil',13,'4,0%','C']]
+};
+function renderABC(key){var list=document.getElementById('abcList');list.innerHTML='';abc[key].forEach(function(r,i){var cls=r[4].toLowerCase();list.innerHTML+='<div class="abcrow"><div class="rank">'+(i+1)+'</div><div class="name">'+r[0]+'</div><div class="track"><i style="width:'+r[2]+'%"></i></div><div class="money">'+r[1]+'</div><div class="pct">'+r[3]+' <span class="pill '+cls+'">'+r[4]+'</span></div></div>'});document.getElementById('abcTitle').textContent=key==='clientesabc'?'Ranking de clientes':key==='produtosabc'?'Ranking de produtos':'Ranking de vendedores'}
+document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.tabs button').forEach(function(x){x.classList.remove('active')});b.classList.add('active');renderABC(b.dataset.tab)})});renderABC('clientesabc');
+</script>
+</body>
+</html>
